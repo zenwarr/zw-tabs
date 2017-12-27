@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {DefaultOptions, Tabs, TabsFactory} from "./index";
+import {DefaultOptions, Tabs, TabsChangeStateEvent, TabsFactory} from "./index";
 
 describe("Tabs", function () {
   function init(html: string): void {
@@ -93,8 +93,16 @@ describe("Tabs", function () {
 
     it('should fire events', function () {
       let fired1 = false, fired2 = false;
-      elem('tabs').addEventListener('before-tabs-change-state', () => fired1 = true);
-      elem('tabs').addEventListener('after-tabs-change-state', () => fired2 = true)
+      elem('tabs').addEventListener('before-tabs-change-state', (e: TabsChangeStateEvent) => {
+        expect(e.detail.oldActiveIndex).to.be.equal(0);
+        expect(e.detail.newActiveIndex).to.be.equal(1);
+        fired1 = true;
+      });
+      elem('tabs').addEventListener('after-tabs-change-state', (e: TabsChangeStateEvent) => {
+        expect(e.detail.oldActiveIndex).to.be.equal(0);
+        expect(e.detail.newActiveIndex).to.be.equal(1);
+        fired2 = true;
+      });
       tabs.activateTab(1);
       expect(fired1).to.be.true;
       expect(fired2).to.be.true;

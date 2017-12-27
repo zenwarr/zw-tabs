@@ -68,12 +68,18 @@ export interface TabData {
     hash: string;
 }
 export interface TabsChangeStateEvent extends CustomEvent {
-    oldActiveIndex: number;
-    newActiveIndex: number;
+    detail: {
+        oldActiveIndex: number;
+        newActiveIndex: number;
+    };
 }
-export interface TabChangeStateEvent extends TabsChangeStateEvent {
-    newStateIsActive: boolean;
-    currentIndex: number;
+export interface TabChangeStateEvent extends CustomEvent {
+    detail: {
+        oldActiveIndex: number;
+        newActiveIndex: number;
+        newStateIsActive: boolean;
+        currentIndex: number;
+    };
 }
 export interface StoredState {
     activeIndex: number;

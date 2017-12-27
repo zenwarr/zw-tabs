@@ -102,13 +102,19 @@ export interface TabData {
 }
 
 export interface TabsChangeStateEvent extends CustomEvent {
-  oldActiveIndex: number;
-  newActiveIndex: number;
+  detail: {
+    oldActiveIndex: number;
+    newActiveIndex: number;
+  }
 }
 
-export interface TabChangeStateEvent extends TabsChangeStateEvent {
-  newStateIsActive: boolean;
-  currentIndex: number;
+export interface TabChangeStateEvent extends CustomEvent {
+  detail: {
+    oldActiveIndex: number;
+    newActiveIndex: number;
+    newStateIsActive: boolean;
+    currentIndex: number;
+  }
 }
 
 export interface StoredState {
@@ -209,8 +215,8 @@ export class Tabs extends base.Component<TabsOptions> {
         detail: {
           oldActiveIndex: this._activeIndex,
           newActiveIndex: index
-        } as TabsChangeStateEvent
-      });
+        }
+      } as TabsChangeStateEvent);
       if (!this.root.dispatchEvent(beforeTabChangeEvent)) {
         // tab switching cancelled
         return false;
@@ -261,8 +267,8 @@ export class Tabs extends base.Component<TabsOptions> {
         detail: {
           oldActiveIndex: oldIndex,
           newActiveIndex: this._activeIndex
-        } as TabsChangeStateEvent
-      });
+        }
+      } as TabsChangeStateEvent);
       this.root.dispatchEvent(afterTabChangeEvent);
     }
 
@@ -497,7 +503,7 @@ export class Tabs extends base.Component<TabsOptions> {
           currentIndex: index,
           newStateIsActive: index === this._activeIndex
         }
-      });
+      } as TabChangeStateEvent);
 
       d.label.dispatchEvent(e);
       d.tab.dispatchEvent(e);
