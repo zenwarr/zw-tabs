@@ -132,12 +132,12 @@ export class Tabs extends base.Component<TabsOptions> {
     this._collectTabs();
     this.root.addEventListener('click', this._onClick.bind(this));
 
-    if ((this.options.autoSaveStateAttr && this.root.hasAttribute(this.options.autoSaveStateAttr)) || this.options.defaultAutoSaveState) {
+    if (base.checkBinaryOptionAttr(this.root, this.options.autoSaveStateAttr, this.options.defaultAutoSaveState || false)) {
       this._autoSaveState = true;
       this.restoreState();
     }
 
-    if ((this.options.hashNavigateAttr && this.root.hasAttribute(this.options.hashNavigateAttr)) || this.options.defaultHashNavigate) {
+    if (base.checkBinaryOptionAttr(this.root, this.options.hashNavigateAttr, this.options.defaultHashNavigate || false)) {
       this._hashNavigate = true;
       window.addEventListener('hashchange', this._onHashChange.bind(this));
       if (location.hash) {

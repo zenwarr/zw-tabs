@@ -1,11 +1,11 @@
 {
   "name": "@zcomp/tabs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@zcomp/base": "0.0.3",
+    "@zcomp/base": "0.0.6",
     "@zcomp/closest": "0.0.2"
   },
   "devDependencies": {
