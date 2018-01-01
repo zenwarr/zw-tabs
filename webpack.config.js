@@ -7,7 +7,7 @@ function buildExternals() {
   let modules = {};
 
   fs.readdirSync('node_modules/@zcomp').forEach(function(mod) {
-    modules['@zcomp/' + mod] = 'z' + mod.replace(/[\-_]/g, '').toLowerCase();
+    modules['@zcomp/' + mod] = '@zcomp/' + mod;
   });
 
   return modules;
@@ -20,8 +20,7 @@ module.exports = [
     output: {
       filename: "index.js",
       path: path.join(__dirname, 'dist'),
-      library: "ztabs",
-      libraryTarget: "var"
+      libraryTarget: "commonjs"
     },
 
     target: 'web',

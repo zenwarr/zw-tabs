@@ -1,13 +1,13 @@
 {
   "name": "@zcomp/tabs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@zcomp/base": "0.0.7",
-    "@zcomp/closest": "0.0.3",
-    "@zcomp/loader": "0.0.2"
+    "@zcomp/base": "0.0.8",
+    "@zcomp/closest": "0.0.4",
+    "@zcomp/loader": "0.0.3"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
