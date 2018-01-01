@@ -1,6 +1,17 @@
 const webpack = require('webpack');
 const path = require('path');
+const fs = require('fs');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
+
+function buildExternals() {
+  let modules = {};
+
+  fs.readdirSync('node_modules/@zcomp').forEach(function(mod) {
+    modules['@zcomp/' + mod] = 'z' + mod.replace(/[\-_]/g, '').toLowerCase();
+  });
+
+  return modules;
+}
 
 module.exports = [
   {
@@ -9,16 +20,17 @@ module.exports = [
     output: {
       filename: "index.js",
       path: path.join(__dirname, 'dist'),
-      libraryTarget: 'commonjs'
+      library: "ztabs",
+      libraryTarget: "var"
     },
-
-    devtool: "inline-source-map",
 
     target: 'web',
 
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.json', '.webpack.js']
     },
+
+    externals: buildExternals(),
 
     module: {
       rules: [

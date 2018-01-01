@@ -1,4 +1,5 @@
 import * as base from '@zcomp/base';
+import * as loader from '@zcomp/loader';
 import closest from "@zcomp/closest";
 
 export interface TabsOptions extends base.ComponentOptions {
@@ -272,9 +273,20 @@ export class Tabs extends base.Component<TabsOptions> {
       this.root.dispatchEvent(afterTabChangeEvent);
     }
 
+    let d = this.activeIndex >= 0 ? this._data[this.activeIndex] : null;
+
     if (this.hashNavigate) {
-      let d = this.activeIndex >= 0 ? this._data[this.activeIndex] : null;
       location.hash = d && d.hash ? '#' + d.hash : '';
+    }
+
+    if (loader && d && d.tab) {
+      let loaders = d.tab.querySelectorAll('.js-load');
+      for (let q = 0; q < loaders.length; ++q) {
+        let ld = loader.LoaderFactory.fromRoot(loaders[q]);
+        if (ld && ld.loadState === loader.LoadState.NotLoaded) {
+          ld.load();
+        }
+      }
     }
 
     return true;

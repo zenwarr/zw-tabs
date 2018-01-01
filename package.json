@@ -1,25 +1,26 @@
 {
   "name": "@zcomp/tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@zcomp/base": "0.0.6",
-    "@zcomp/closest": "0.0.2"
+    "@zcomp/base": "0.0.7",
+    "@zcomp/closest": "0.0.3",
+    "@zcomp/loader": "0.0.2"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
     "@types/jsdom": "^11.0.4",
-    "@types/mocha": "^2.2.44",
+    "@types/mocha": "^2.2.45",
     "chai": "^4.1.2",
     "jsdom": "^11.3.0",
     "jsdom-global": "^3.0.2",
-    "mocha": "^4.0.1",
+    "mocha": "^4.1.0",
     "ts-loader": "^3.1.1",
-    "ts-node": "^3.3.0",
+    "ts-node": "^4.1.0",
     "typescript": "^2.6.1",
-    "uglifyjs-webpack-plugin": "^1.1.2",
+    "uglifyjs-webpack-plugin": "^1.1.5",
     "webpack": "^3.8.1"
   },
   "repository": {
