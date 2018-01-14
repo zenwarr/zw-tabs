@@ -15,11 +15,19 @@ export interface TabsOptions extends base.ComponentOptions {
     /**
      * Class to add to active tabs
      */
-    activeTabClass?: string;
+    tabActiveClass?: string;
     /**
      * Class to add to active labels
      */
-    activeLabelClass?: string;
+    labelActiveClass?: string;
+    /**
+     * Class to add to inactive tabs
+     */
+    tabInactiveClass?: string;
+    /**
+     * Class to add to inactive labels
+     */
+    labelInactiveClass?: string;
     /**
      * Name of event fired before tabs change state.
      * This event is cancellable -- if you cancel it, tab will not be switched.

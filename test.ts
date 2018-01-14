@@ -309,4 +309,31 @@ describe("Tabs", function () {
       done();
     }, 0);
   });
+
+  it('should handle nested tabs', function () {
+    init(`<div class="js-tabs" id="tabs">
+      <button class="js-tabs__label"></button>
+      <button class="js-tabs__label"></button>
+      <button class="js-tabs__label"></button>
+      
+      <div class="js-tabs__tab"></div>
+      <div class="js-tabs__tab"></div>
+      <div class="js-tabs__tab">
+        <div class="js-tabs" id="tabs-nested">
+          <button class="js-tabs__label"></button>
+          <button class="js-tabs__label"></button>
+          
+          <div class="js-tabs__tab"></div>
+          <div class="js-tabs__tab"></div>
+        </div>      
+      </div>
+    </div>`);
+
+    TabsFactory.init();
+    let tabs = TabsFactory.fromRoot(elem('tabs')) as Tabs;
+    let tabsNested = TabsFactory.fromRoot(elem('tabs-nested')) as Tabs;
+
+    expect(tabs.tabCount).to.be.equal(3);
+    expect(tabsNested.tabCount).to.be.equal(2);
+  });
 });

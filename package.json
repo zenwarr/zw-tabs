@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@zcomp/base": "0.0.8",
+    "@zcomp/base": "0.0.9",
     "@zcomp/closest": "0.0.4",
-    "@zcomp/loader": "0.0.3"
+    "@zcomp/loader": "0.0.4"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",

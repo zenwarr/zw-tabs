@@ -21,12 +21,22 @@ export interface TabsOptions extends base.ComponentOptions {
   /**
    * Class to add to active tabs
    */
-  activeTabClass?: string;
+  tabActiveClass?: string;
 
   /**
    * Class to add to active labels
    */
-  activeLabelClass?: string;
+  labelActiveClass?: string;
+
+  /**
+   * Class to add to inactive tabs
+   */
+  tabInactiveClass?: string;
+
+  /**
+   * Class to add to inactive labels
+   */
+  labelInactiveClass?: string;
 
   /**
    * Name of event fired before tabs change state.
@@ -83,8 +93,10 @@ export const DefaultOptions: TabsOptions = {
   tabsInitedClass: 'js-tabs--inited',
   tabSelector: '.js-tabs__tab',
   labelSelector: '.js-tabs__label',
-  activeTabClass: 'js-tabs__tab--active',
-  activeLabelClass: 'js-tabs__label--active',
+  tabActiveClass: 'js-tabs__tab--active',
+  labelActiveClass: 'js-tabs__label--active',
+  tabInactiveClass: 'js-tabs__tab--inactive',
+  labelInactiveClass: 'js-tabs__label--inactive',
   beforeTabsChangeStateEvent: 'before-tabs-change-state',
   afterTabsChangeStateEvent: 'after-tabs-change-state',
   tabChangeStateEvent: 'tab-change-state',
@@ -234,11 +246,11 @@ export class Tabs extends base.Component<TabsOptions> {
     if (oldIndex >= 0 && oldIndex < this._data.length) {
       let d = this._data[oldIndex];
 
-      if (this.options.activeLabelClass) {
-        d.label.classList.remove(this.options.activeLabelClass);
+      if (this.options.labelActiveClass) {
+        d.label.classList.remove(this.options.labelActiveClass);
       }
-      if (this.options.activeTabClass) {
-        d.tab.classList.remove(this.options.activeTabClass);
+      if (this.options.tabActiveClass) {
+        d.tab.classList.remove(this.options.tabActiveClass);
       }
 
       if (this.options.tabChangeStateEvent) {
@@ -249,11 +261,11 @@ export class Tabs extends base.Component<TabsOptions> {
     if (this._activeIndex >= 0) {
       let d = this._data[this._activeIndex];
 
-      if (this.options.activeLabelClass) {
-        d.label.classList.add(this.options.activeLabelClass);
+      if (this.options.labelActiveClass) {
+        d.label.classList.add(this.options.labelActiveClass);
       }
-      if (this.options.activeTabClass) {
-        d.tab.classList.add(this.options.activeTabClass);
+      if (this.options.tabActiveClass) {
+        d.tab.classList.add(this.options.tabActiveClass);
       }
 
       if (this.options.tabChangeStateEvent) {
@@ -528,8 +540,11 @@ export class Tabs extends base.Component<TabsOptions> {
       return;
     }
 
-    let labels = this.root.querySelectorAll(this.options.labelSelector);
-    let tabs = this.root.querySelectorAll(this.options.tabSelector);
+    let labels: Element[] = [],
+        tabs: Element[] = [];
+    this._each(this.options.labelSelector, e => labels.push(e));
+    this._each(this.options.tabSelector, e => tabs.push(e));
+
     if (labels.length !== tabs.length) {
       console.warn('Tabs plugin: label count does not match tab count');
     }
@@ -539,9 +554,9 @@ export class Tabs extends base.Component<TabsOptions> {
       let label = labels[q] as Element,
           tab = tabs[q] as Element;
 
-      if (this.options.activeLabelClass && label.classList.contains(this.options.activeLabelClass)) {
+      if (this.options.labelActiveClass && label.classList.contains(this.options.labelActiveClass)) {
         defActiveIndex = q;
-      } else if (this.options.activeTabClass && tab.classList.contains(this.options.activeTabClass)) {
+      } else if (this.options.tabActiveClass && tab.classList.contains(this.options.tabActiveClass)) {
         defActiveIndex = q;
       }
 
