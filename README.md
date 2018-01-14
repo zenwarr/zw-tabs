@@ -56,12 +56,8 @@ You should manually set styles for active and inactive tabs to hide it.
 For example:
 
 ```css
-.js-tabs__tab {
-  display: none
-}
-
-.js-tabs__tab--active {
-  display: block;
+.js-tabs__tab--inactive {
+  display: none;
 }
 ```
 
@@ -184,8 +180,10 @@ Option list below:
 | tabsInitedClass               | Class to add to root element of initialized component  | 'js-tabs--inited'            |
 | tabSelector                   | Selector for tab elements                              | '.js-tabs__tab'              |
 | labelSelector                 | Selector for label elements                            | '.js-tabs__label'            |
-| activeTabClass                | Class to add to active tabs                            | 'js-tabs__tab--active'       |
-| activeLabelClass              | Class to add to active labels                          | 'js-tabs__label--active'     |
+| tabActiveClass                | Class to add to active tabs                            | 'js-tabs__tab--active'       |
+| labelActiveClass              | Class to add to active labels                          | 'js-tabs__label--active'     |
+| tabInactiveClass              | Class to add to inactive tabs                          | 'js-tabs__tab--inactive'     |
+| labelInactiveClass            | Class to add to inactive labels                        | 'js-tabs__label--inactive'   |
 | beforeTabsChangeStateEvent    | Name of event fired before tabs change state           | 'before-tabs-change-state'   |
 | afterTabsChangeStateEvent     | Name of event fired after tabs change state            | 'after-tabs-change-state'    |
 | tabChangeStateEvent           | Name of event fired after tab of label change state    | 'tab-change-state'           |

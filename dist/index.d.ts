@@ -138,6 +138,7 @@ export declare class Tabs extends base.Component<TabsOptions> {
      * @returns {boolean} Whether tab with given index has been activated.
      */
     activateTab(index: number): boolean;
+    protected _syncClasses(): void;
     /**
      * Get index of tab this label belongs to
      * @param {Element} label Label element

@@ -67,17 +67,25 @@ describe("Tabs", function () {
 
     it('should set default classes', function () {
       expect(hasClass('label1', 'js-tabs__label--active')).to.be.true;
+      expect(hasClass('label1', 'js-tabs__label--inactive')).to.be.false;
       expect(hasClass('label2', 'js-tabs__label--active')).to.be.false;
+      expect(hasClass('label2', 'js-tabs__label--inactive')).to.be.true;
       expect(hasClass('tab1', 'js-tabs__tab--active')).to.be.true;
+      expect(hasClass('tab1', 'js-tabs__tab--inactive')).to.be.false;
       expect(hasClass('tab2', 'js-tabs__tab--active')).to.be.false;
+      expect(hasClass('tab2', 'js-tabs__tab--inactive')).to.be.true;
     });
 
     it('should react on label click', function () {
       sendEvent('label2', 'click');
       expect(hasClass('label1', 'js-tabs__label--active')).to.be.false;
+      expect(hasClass('label1', 'js-tabs__label--inactive')).to.be.true;
       expect(hasClass('label2', 'js-tabs__label--active')).to.be.true;
+      expect(hasClass('label2', 'js-tabs__label--inactive')).to.be.false;
       expect(hasClass('tab1', 'js-tabs__tab--active')).to.be.false;
+      expect(hasClass('tab1', 'js-tabs__tab--inactive')).to.be.true;
       expect(hasClass('tab2', 'js-tabs__tab--active')).to.be.true;
+      expect(hasClass('tab2', 'js-tabs__tab--inactive')).to.be.false;
     });
 
     it('activateTab', function () {

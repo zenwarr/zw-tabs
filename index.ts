@@ -243,34 +243,14 @@ export class Tabs extends base.Component<TabsOptions> {
       this.saveState();
     }
 
-    if (oldIndex >= 0 && oldIndex < this._data.length) {
-      let d = this._data[oldIndex];
+    this._syncClasses();
 
-      if (this.options.labelActiveClass) {
-        d.label.classList.remove(this.options.labelActiveClass);
-      }
-      if (this.options.tabActiveClass) {
-        d.tab.classList.remove(this.options.tabActiveClass);
-      }
-
-      if (this.options.tabChangeStateEvent) {
-        this._sendEvent(oldIndex, oldIndex, this.options.tabChangeStateEvent);
-      }
+    if (this.options.tabChangeStateEvent) {
+      this._sendEvent(oldIndex, oldIndex, this.options.tabChangeStateEvent);
     }
 
-    if (this._activeIndex >= 0) {
-      let d = this._data[this._activeIndex];
-
-      if (this.options.labelActiveClass) {
-        d.label.classList.add(this.options.labelActiveClass);
-      }
-      if (this.options.tabActiveClass) {
-        d.tab.classList.add(this.options.tabActiveClass);
-      }
-
-      if (this.options.tabChangeStateEvent) {
-        this._sendEvent(this._activeIndex, oldIndex, this.options.tabChangeStateEvent);
-      }
+    if (this.options.tabChangeStateEvent) {
+      this._sendEvent(this._activeIndex, oldIndex, this.options.tabChangeStateEvent);
     }
 
     if (this.options.afterTabsChangeStateEvent) {
@@ -302,6 +282,26 @@ export class Tabs extends base.Component<TabsOptions> {
     }
 
     return true;
+  }
+
+  protected _syncClasses(): void {
+    for (let q = 0; q < this._data.length; ++q) {
+      let isActive = q === this._activeIndex;
+      let d = this._data[q];
+
+      if (this.options.labelActiveClass) {
+        d.label.classList.toggle(this.options.labelActiveClass, isActive);
+      }
+      if (this.options.labelInactiveClass) {
+        d.label.classList.toggle(this.options.labelInactiveClass, !isActive);
+      }
+      if (this.options.tabActiveClass) {
+        d.tab.classList.toggle(this.options.tabActiveClass, isActive);
+      }
+      if (this.options.tabInactiveClass) {
+        d.tab.classList.toggle(this.options.tabInactiveClass, !isActive);
+      }
+    }
   }
 
   /**
@@ -578,8 +578,10 @@ export class Tabs extends base.Component<TabsOptions> {
       defActiveIndex = 0;
     }
 
-    if (defActiveIndex >= 0) {
+    if (defActiveIndex >= 0 && defActiveIndex < this.tabCount) {
       this.activateTab(defActiveIndex);
+    } else {
+      this._syncClasses();
     }
   }
 
